@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <input 
+            type="text" 
+            :placeholder="myHolder"
+            v-model="text"    
+            @keyup.enter="addCar"
+        >
+        <button 
+            class="add" 
+            @click="addCar"
+        >
+            Dobavit
+        </button>
+        <ul>
+            <li
+                v-for="(car, i) in cars" :key="i">
+                <span>{{i + 1}} . Vi dobavili - {{car}}</span>
+
+                <button class="delete" @click="removeCar(i)">
+                    Udalit
+                </button>
+            </li>
+        </ul>
+        <p>Kolichestvo dobavlennih elemontov: </p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                title: 'Spisok zadach',
+                myHolder: 'Vvedite nazvanie elementa...',
+                cars: ['Nexia 3', 'Gentra', 'Cobolt', 'Spark', 'Damas'],
+                text: ""
+            },
+            methods: {
+                addCar() {
+                    if(this.text != '') {
+                        this.cars.push(this.text)
+                    }
+                    this.text = ''
+                },
+                removeCar(index) {
+                    this.cars.splice(index, 1)
+                }
+            },
+            computed: {
+                getLength() {
+                    return this.cars.length;
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
