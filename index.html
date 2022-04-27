@@ -24,7 +24,7 @@
         >
             Dobavit
         </button>
-        <ul>
+        <ul v-if="cars.length > 0">
             <li
                 v-for="(car, i) in cars" :key="i">
                 <span>{{i + 1}} . Vi dobavili - {{car}}</span>
@@ -34,7 +34,8 @@
                 </button>
             </li>
         </ul>
-        <p>Kolichestvo dobavlennih elemontov: </p>
+        <h2 v-else>Dobavte element v spisok!</h2>
+        <p>Kolichestvo dobavlennih elemontov:{{getLength}} </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
